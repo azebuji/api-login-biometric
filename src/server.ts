@@ -5,9 +5,9 @@ import { createServer } from "http";
 import https from 'https';
 import path from 'path';
 
-import ErrorHandler from './errors/errorHandlerRoute';
 //import jobs from './global/helpers/functions/jobs/jobs';
 import { initializeSocket } from './config/socketManager';
+import ErrorHandler from './errors/errorHandlerRoute';
 import socketHandlers from './global/websockets/socketHandlers';
 import routes from './routes';
 
@@ -17,13 +17,13 @@ if (process.env.npm_lifecycle_event == 'dev') {
 
 const app = express();
 
-const server = https.createServer({
+/*const server = https.createServer({
   cert: fs.readFileSync('/etc/letsencrypt/live/humanizei.digital/cert.pem'),
   ca: fs.readFileSync('/etc/letsencrypt/live/humanizei.digital/chain.pem'),
   key: fs.readFileSync('/etc/letsencrypt/live/humanizei.digital/privkey.pem')
-}, app);
+}, app);*/
 //app.use(verifyJsonMiddleware);
-//const server = createServer(app);
+const server = createServer(app);
 initializeSocket(server);
 socketHandlers();
 app.use(express.json());
